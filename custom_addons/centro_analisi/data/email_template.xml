@@ -1,0 +1,17 @@
+<odoo>
+    <record id="email_template_reminder" model="mail.template">
+        <field name="name">Reminder Analisi</field>
+        <field name="model_id" ref="centro_analisi.model_centro_analisi_reminder"/>
+        <field name="email_from">${(object.analisi_id.cliente_id.email) or ''}</field>
+        <field name="email_to">${(object.analisi_id.cliente_id.email) or ''}</field>
+        <field name="subject">Reminder: Scadenza Analisi</field>
+        <field name="body_html">
+            <![CDATA[
+                <p>Gentile ${object.analisi_id.cliente_id.name},</p>
+                <p>Le ricordiamo che la sua analisi (${object.analisi_id.tipo_analisi}) è in scadenza il ${object.analisi_id.data_scadenza}.</p>
+                <p>La invitiamo a prenotare una nuova analisi.</p>
+                <p>Saluti, Centro Analisi</p>
+            ]]>
+        </field>
+    </record>
+</odoo>

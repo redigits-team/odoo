@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_reminder_form" model="ir.ui.view">
+        <field name="name">centro.analisi.reminder.form</field>
+        <field name="model">centro.analisi.reminder</field>
+        <field name="arch" type="xml">
+            <form string="Promemoria Analisi">
+                <sheet>
+                    <group>
+                        <field name="analisi_id" string="Analisi"/>
+                        <field name="data_reminder" string="Scadenza Analisi"/>
+                        <field name="inviato" string="Inviato"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_reminder_kanban" model="ir.ui.view">
+        <field name="name">centro.analisi.reminder.kanban</field>
+        <field name="model">centro.analisi.reminder</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_view">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <field name="analisi_id" class="oe_kanban_content" string="Analisi"/>
+                            <field name="data_reminder" class="oe_kanban_content" string="Scadenza Analisi"/>
+                            <field name="inviato" class="oe_kanban_content" string="Inviato"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

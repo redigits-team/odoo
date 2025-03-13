@@ -1,0 +1,104 @@
+<odoo>
+    <!-- Menu principale -->
+    <menuitem id="centro_analisi_menu_root" name="Centro Analisi" sequence="10"/>
+
+    <record id="action_centro_analisi_analisi" model="ir.actions.act_window">
+        <field name="name">Analisi</field>
+        <field name="res_model">centro.analisi.analisi</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_centro_analisi_tipianalisi" model="ir.actions.act_window">
+        <field name="name">Tipi di Analisi</field>
+        <field name="res_model">centro.analisi.tipianalisi</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Azioni -->
+    <record id="action_centro_analisi_cliente" model="ir.actions.act_window">
+        <field name="name">Clienti</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_centro_analisi_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">centro.analisi.dashboard</field>
+        <field name="view_mode">form,list,graph</field>
+        <field name="help" type="html">
+            <p>Questa è la dashboard del Centro Analisi. Seleziona un'opzione per iniziare.</p>
+        </field>
+    </record>
+
+    <record id="action_centro_analisi_reminder" model="ir.actions.act_window">
+        <field name="name">Reminder</field>
+        <field name="res_model">centro.analisi.reminder</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Azione per Crea Cliente -->
+    <record id="action_centro_analisi_crea_utente" model="ir.actions.act_window">
+        <field name="name">Crea Cliente</field>
+        <field name="res_model">res.partner</field> <!-- Sostituisci con il modello corretto -->
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Azione per Crea Analisi -->
+    <record id="action_centro_analisi_crea_analisi" model="ir.actions.act_window">
+        <field name="name">Crea Analisi</field>
+        <field name="res_model">centro.analisi.analisi</field> <!-- Sostituisci con il modello corretto -->
+        <field name="view_mode">form</field>
+    </record>
+
+    <!-- Azione per Lista Clienti -->
+    <record id="action_centro_analisi_lista_client" model="ir.actions.act_window">
+        <field name="name">Lista Clienti</field>
+        <field name="res_model">res.partner</field> <!-- Sostituisci con il modello corretto -->
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- Sottomenù Cliente -->
+    <menuitem id="centro_analisi_menu_cliente" name="Clienti"
+              parent="centro_analisi_menu_root" sequence="30"
+              action="action_centro_analisi_cliente"/>
+
+    <!-- Sottomenù Analisi -->
+    <menuitem id="centro_analisi_menu_analisi" name="Analisi"
+              parent="centro_analisi_menu_root" sequence="40"
+              action="action_centro_analisi_analisi"/>
+
+    <!-- Sottomenù Reminder -->
+    <menuitem id="centro_analisi_menu_reminder" name="Reminder"
+              parent="centro_analisi_menu_root" sequence="50"
+              action="action_centro_analisi_reminder"/>
+
+    <menuitem id="centro_analisi_dashboard_menu" name="Dashboard" 
+              parent="centro_analisi_menu_root" sequence="20"
+              action="action_centro_analisi_dashboard"/>
+
+    <!-- Sottomenù Crea Utente dentro Clienti -->
+    <menuitem id="centro_analisi_menu_crea_utente" name="Crea Utente"
+              parent="centro_analisi_menu_cliente" sequence="20"
+              action="action_centro_analisi_crea_utente"/>
+
+    <!-- Sottomenù Lista Utenti dentro Clienti -->
+    <menuitem id="centro_analisi_menu_lista_clienti" name="Lista Clienti"
+              parent="centro_analisi_menu_cliente" sequence="30"
+              action="action_centro_analisi_cliente"/>
+
+    <!-- Sottomenù Crea Analisi -->
+    <menuitem id="centro_analisi_menu_crea_analisi" name="Crea Analisi"
+              parent="centro_analisi_menu_analisi" sequence="25"
+              action="action_centro_analisi_crea_analisi"/>
+
+    <!-- Sottomenù Lista Analisi -->
+    <menuitem id="centro_analisi_menu_lista_analisi" name="Lista Analisi"
+              parent="centro_analisi_menu_analisi" sequence="30"
+              action="action_centro_analisi_analisi"/>
+    
+    <!-- Sottomenù Lista Analisi -->
+    <menuitem id="centro_nalisi_menu_lista_tipianalisi" name="Tipi di Analisi"
+              parent="centro_analisi_menu_analisi" sequence="40"
+              action="action_centro_analisi_tipianalisi"/>
+    
+</odoo>

@@ -1,0 +1,1 @@
+python odoo-bin --addons-path=addons,custom_addons -u centro_analisi -d mydb

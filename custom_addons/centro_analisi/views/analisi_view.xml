@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_analisi_form" model="ir.ui.view">
+        <field name="name">centro.analisi.analisi.form</field>
+        <field name="model">centro.analisi.analisi</field>
+        <field name="arch" type="xml">
+            <form string="Analisi Cliente">
+                <sheet>
+                    <group>
+                        <field name="partner_id" string="Cliente"/>
+                        <field name="tipo_analisi_id" string="Tipo di Analisi"/>
+                        <field name="data_effettuata" string="Data Effettuata"/>
+                        <field name="data_scadenza" string="Data Scadenza"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_analisi_list" model="ir.ui.view">
+        <field name="name">centro.analisi.analisi.list</field>
+        <field name="model">centro.analisi.analisi</field>
+        <field name="arch" type="xml">
+            <list string="Analisi">
+                <field name="partner_id" string="Cliente"/>
+                <field name="tipo_analisi_id" string="Tipo"/>
+                <field name="data_effettuata" string="Data esecuzione"/>
+                <field name="data_scadenza" string="Data scadenza"/>
+                <control>
+                    <create string="Add a item"/>
+                    <create string="Add a section" context="{'default_type': 'section'}"/>
+                    <create string="Add a note" context="{'default_type': 'note'}"/>
+                </control>
+            </list>
+        </field>
+    </record>
+</odoo>
