@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * centro_analisi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: centro_analisi\n"
+"POT-Creation-Date: 2025-03-11\n"
+"PO-Revision-Date: 2025-03-11\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Odoo\n"
+
+#. module: centro_analisi
+#: model:ir.ui.view,arch_db:centro_analisi.view_cliente_form
+msgid "Cliente"
+msgstr "Cliente"
+
+#. module: centro_analisi
+#: model:ir.model.fields,field_description:centro_analisi.field_cliente_nome_completo
+msgid "Nome Completo"
+msgstr "Nome Completo"
+
+#. module: centro_analisi
+#: model:ir.model.fields,field_description:centro_analisi.field_cliente_email
+msgid "Email"
+msgstr "Email"
+
+#. module: centro_analisi
+#: model:ir.model.fields,field_description:centro_analisi.field_cliente_telefono
+msgid "Telefono"
+msgstr "Telefono"
+
+#. module: centro_analisi
+#: model:ir.ui.view,arch_db:centro_analisi.view_reminder_form
+msgid "Reminder Analisi"
+msgstr "Promemoria Analisi"
+
+#. module: centro_analisi
+#: model:ir.model.fields,field_description:centro_analisi.field_reminder_scadenza
+msgid "Scadenza Analisi"
+msgstr "Scadenza Analisi"
+
+#. module: centro_analisi
+#: model:ir.model.fields,field_description:centro_analisi.field_reminder_inviato
+msgid "Inviato"
+msgstr "Inviato"

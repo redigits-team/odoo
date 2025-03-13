@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_analisi,access_analisi,model_centro_analisi_analisi,,1,1,1,1
+access_reminder,access_reminder,model_centro_analisi_reminder,,1,1,1,1
+access_dashboard,access_dashboard,model_centro_analisi_dashboard,,1,1,1,1
+access_tipianalisi,access_tipianalisi,model_centro_analisi_tipianalisi,,1,1,1,1
+

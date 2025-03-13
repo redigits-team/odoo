@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="action_centro_analisi_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">centro.analisi.dashboard</field>
+            <field name="view_mode">form</field>
+            <field name="help" type="html">
+                <p>Questa è la dashboard del Centro Analisi. Seleziona un'opzione per iniziare.</p>
+            </field>
+        </record>
+    </data>
+</odoo>

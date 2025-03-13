@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <!-- Vista Dashboard -->
+        <record id="view_centro_analisi_dashboard" model="ir.ui.view">
+            <field name="name">centro.analisi.dashboard.view</field>
+            <field name="model">centro.analisi.dashboard</field>
+            <field name="arch" type="xml">
+                <form string="Dashboard Centro Analisi">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Centro Analisi - Dashboard</h1>
+                        </div>
+
+                        <!-- Layout a due colonne -->
+                        <div style="display: flex; justify-content: space-between; gap: 20px;">
+
+                            <!-- Colonna Sinistra: KPI -->
+                            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;">
+                                <group>
+                                    <field name="total_analisi" widget="statinfo" string="Totale Analisi"/>
+                                    <field name="analisi_in_scadenza" widget="statinfo" string="Analisi in Scadenza"/>
+                                    <field name="clienti_totali" widget="statinfo" string="Totale Clienti"/>
+                                </group>
+                            </div>
+
+                            <!-- Colonna Destra: Grafico -->
+                            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #ffffff;">
+                                <group>
+                                    <graph type="bar" string="Distribuzione Tipi di Analisi">
+                                        <field name="tipo_analisi_counts" type="measure"/>
+                                    </graph>
+                                </group>
+                            </div>
+
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
