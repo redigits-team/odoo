@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enhanced Policy List View -->
+    <record id="view_insurance_policy_enhanced_list" model="ir.ui.view">
+        <field name="name">insurance.policy.enhanced.list</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="insurance_management.view_insurance_policy_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="partner_id" string="Client"/>
+                <field name="vehicle_license_plate" string="License Plate"/>
+                <field name="vehicle_brand" optional="show"/>
+                <field name="vehicle_model" optional="show"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='start_date']" position="after">
+                <field name="payment_frequency" optional="show"/>
+                <field name="next_payment_date" optional="show"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='end_date']" position="after">
+                <field name="payment_count" string="Payments" widget="integer_badge"/>
+                <field name="amount_total" widget="monetary" string="Premium"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Enhanced Policy Search View -->
+    <record id="view_insurance_policy_enhanced_search" model="ir.ui.view">
+        <field name="name">insurance.policy.enhanced.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="insurance_management.view_insurance_policy_search"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <filter name="active_policies" position="after">
+                <filter string="Expiring within 30 days" name="expiring_soon"
+                       domain="[('end_date', '>=', context_today().strftime('%Y-%m-%d')), 
+                                ('end_date', '&lt;=', (context_today() + relativedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Created Today" name="created_today"
+                       domain="[('create_date', '>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                                ('create_date', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <filter string="Payment Due This Month" name="payment_due_month"
+                       domain="[('next_payment_date', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                                ('next_payment_date', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Annual Payment" name="annual_payment" domain="[('payment_frequency', '=', 'annual')]"/>
+                <filter string="Monthly Payment" name="monthly_payment" domain="[('payment_frequency', '=', 'monthly')]"/>
+                <filter string="Semi-Annual Payment" name="semiannual_payment" domain="[('payment_frequency', '=', 'semiannual')]"/>
+                <filter string="Quarterly Payment" name="quarterly_payment" domain="[('payment_frequency', '=', 'quarterly')]"/>
+            </filter>
+            
+            <group position="inside">
+                <filter string="Vehicle Brand" name="vehicle_brand" domain="[]" context="{'group_by': 'vehicle_brand'}"/>
+                <filter string="Payment Frequency" name="payment_frequency" domain="[]" context="{'group_by': 'payment_frequency'}"/>
+            </group>
+        </field>
+    </record>
+    
+    <!-- Enhanced Policy Kanban View -->
+    <record id="view_insurance_policy_enhanced_kanban" model="ir.ui.view">
+        <field name="name">insurance.policy.enhanced.kanban</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <kanban string="Insurance Policies" default_group_by="policy_status" sample="1">
+                <field name="id"/>
+                <field name="policy_number"/>
+                <field name="partner_id"/>
+                <field name="policy_status"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="vehicle_license_plate"/>
+                <field name="vehicle_brand"/>
+                <field name="vehicle_model"/>
+                <field name="payment_count"/>
+                <field name="payment_frequency"/>
+                <field name="next_payment_date"/>
+                <field name="amount_total"/>
+                <field name="has_theft_coverage"/>
+                <field name="has_fire_coverage"/>
+                <field name="has_black_box"/>
+                <field name="has_assistance"/>
+                <field name="currency_id"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click o_kanban_record">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <span><field name="policy_number"/></span>
+                                        </strong>
+                                        <small class="o_kanban_record_subtitle">
+                                            <field name="partner_id"/>
+                                        </small>
+                                    </div>
+                                    <div class="o_dropdown_kanban dropdown">
+                                        <a role="button" class="dropdown-toggle o-no-caret btn" data-bs-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                            <span class="fa fa-ellipsis-v"/>
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <t t-if="widget.editable">
+                                                <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                                            </t>
+                                            <t t-if="widget.deletable">
+                                                <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                            </t>
+                                            <div role="separator" class="dropdown-divider"/>
+                                            <a role="menuitem" name="action_view_payments" type="object" class="dropdown-item">View Payments</a>
+                                            <t t-if="record.policy_status.raw_value == 'sale' and record.payment_count.raw_value == 0">
+                                                <a role="menuitem" name="action_create_payments" type="object" class="dropdown-item">Create Payments</a>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="o_kanban_tags_section">
+                                    <span t-if="record.has_theft_coverage.raw_value" class="badge rounded-pill text-bg-primary">Theft</span>
+                                    <span t-if="record.has_fire_coverage.raw_value" class="badge rounded-pill text-bg-danger">Fire</span>
+                                    <span t-if="record.has_black_box.raw_value" class="badge rounded-pill text-bg-success">Black Box</span>
+                                    <span t-if="record.has_assistance.raw_value" class="badge rounded-pill text-bg-info">Assistance</span>
+                                </div>
+                                
+                                <div class="o_kanban_record_body">
+                                    <div>
+                                        <strong>Vehicle:</strong> <field name="vehicle_brand"/> <field name="vehicle_model"/> (<field name="vehicle_license_plate"/>)
+                                    </div>
+                                    <div>
+                                        <strong>Dates:</strong> <field name="start_date"/> to <field name="end_date"/>
+                                    </div>
+                                    <div>
+                                        <strong>Payment:</strong> <field name="payment_frequency"/> 
+                                        <t t-if="record.next_payment_date.raw_value">
+                                            (Next: <field name="next_payment_date"/>)
+                                        </t>
+                                    </div>
+                                </div>
+                                
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="payment_count" widget="integer_badge"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <span class="oe_kanban_amount">
+                                            <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <!-- Enhanced Policy Calendar View -->
+    <record id="view_insurance_policy_enhanced_calendar" model="ir.ui.view">
+        <field name="name">insurance.policy.enhanced.calendar</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Insurance Policies" 
+                      date_start="start_date" 
+                      date_stop="end_date" 
+                      mode="month"
+                      event_open_popup="true">
+                <field name="partner_id"/>
+                <field name="policy_number"/>
+                <field name="vehicle_license_plate"/>
+                <field name="amount_total"/>
+            </calendar>
+        </field>
+    </record>
+    
+    <!-- Enhanced Policy Management Action -->
+    <record id="action_insurance_policy_management" model="ir.actions.act_window">
+        <field name="name">Policy Management</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">kanban,list,form,calendar,pivot,graph</field>
+        <field name="domain">[('is_policy', '=', True)]</field>
+        <field name="context">{'default_is_policy': True}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                 (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_insurance_policy_enhanced_kanban')}),
+                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_insurance_policy_enhanced_list')}),
+                 (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_insurance_policy_enhanced_calendar')})]"/>
+        <field name="search_view_id" ref="view_insurance_policy_enhanced_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance policy
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add insurance fields to partner form view -->
+    <record id="view_partner_form_insurance" model="ir.ui.view">
+        <field name="name">res.partner.form.insurance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Insurance Details" name="insurance_details" invisible="is_company">
+                    <group>
+                        <group>
+                            <field name="tax_id_number"/>
+                            <field name="profession"/>
+                            <field name="is_insurance_agent"/>
+                        </group>
+                        <group>
+                            <field name="agent_id" invisible="is_insurance_agent"/>
+                            <field name="policy_count" invisible="is_insurance_agent"/>
+                        </group>
+                    </group>
+                    <button 
+                        name="action_view_policies" 
+                        type="object" 
+                        class="oe_stat_button" 
+                        icon="fa-list"
+                        invisible="policy_count == 0 or is_insurance_agent"
+                        string="View Policies"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Partners (customers) filter view -->
+    <record id="view_res_partner_filter_insurance" model="ir.ui.view">
+        <field name="name">res.partner.select.insurance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <filter name="customer" position="after">
+                <filter string="Insurance Agents" name="insurance_agents" domain="[('is_insurance_agent', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+
+    <!-- Partners (customers) tree view -->
+    <record id="view_partner_tree_insurance" model="ir.ui.view">
+        <field name="name">res.partner.tree.insurance</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="phone" position="after">
+                <field name="agent_id" optional="show"/>
+                <field name="policy_count" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Define actions for insurance customers -->
+    <record id="action_insurance_customers" model="ir.actions.act_window">
+        <field name="name">Insurance Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'default_is_company': False, 'search_default_customer': 1}</field>
+        <field name="domain">[('is_company', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance customer
+            </p>
+        </field>
+    </record>
+
+    <!-- Define actions for insurance agents -->
+    <record id="action_insurance_agents" model="ir.actions.act_window">
+        <field name="name">Insurance Agents</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'default_is_insurance_agent': True}</field>
+        <field name="domain">[('is_insurance_agent', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance agent
+            </p>
+        </field>
+    </record>
+</odoo>

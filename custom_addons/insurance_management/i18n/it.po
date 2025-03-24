@@ -1,0 +1,541 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* insurance_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-24 12:00+0000\n"
+"PO-Revision-Date: 2025-03-24 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: it\n"
+
+#. module: insurance_management
+#: model:ir.module.category,name:insurance_management.module_category_insurance
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_root
+msgid "Insurance Management"
+msgstr "Gestione Assicurazioni"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_res_partner__tax_id_number
+msgid "Tax ID Number"
+msgstr "Codice Fiscale"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_res_partner__profession
+msgid "Profession"
+msgstr "Professione"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_res_partner__agent_id
+msgid "Insurance Agent"
+msgstr "Agente Assicurativo"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_res_partner__is_insurance_agent
+msgid "Is Insurance Agent"
+msgstr "È Agente Assicurativo"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_res_partner__policy_count
+msgid "Policies"
+msgstr "Polizze"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__is_policy
+msgid "Is Insurance Policy"
+msgstr "È Polizza Assicurativa"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__policy_number
+msgid "Policy Number"
+msgstr "Numero Polizza"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__policy_status
+msgid "Policy Status"
+msgstr "Stato Polizza"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__start_date
+msgid "Start Date"
+msgstr "Data Inizio"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__end_date
+msgid "End Date"
+msgstr "Data Fine"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__next_payment_date
+msgid "Next Payment Date"
+msgstr "Data Prossimo Pagamento"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__duration_months
+msgid "Duration (Months)"
+msgstr "Durata (Mesi)"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__vehicle_license_plate
+msgid "License Plate"
+msgstr "Targa"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__vehicle_brand
+msgid "Vehicle Brand"
+msgstr "Marca Veicolo"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__vehicle_model
+msgid "Vehicle Model"
+msgstr "Modello Veicolo"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__vehicle_year
+msgid "Year"
+msgstr "Anno"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__has_theft_coverage
+msgid "Theft Coverage"
+msgstr "Copertura Furto"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__has_fire_coverage
+msgid "Fire Coverage"
+msgstr "Copertura Incendio"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__has_black_box
+msgid "Black Box"
+msgstr "Scatola Nera"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__has_assistance
+msgid "Roadside Assistance"
+msgstr "Assistenza Stradale"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__payment_frequency
+msgid "Payment Frequency"
+msgstr "Frequenza Pagamento"
+
+#. module: insurance_management
+#: model:ir.model.fields.selection,name:insurance_management.selection__sale_order__payment_frequency__annual
+msgid "Annual"
+msgstr "Annuale"
+
+#. module: insurance_management
+#: model:ir.model.fields.selection,name:insurance_management.selection__sale_order__payment_frequency__semiannual
+msgid "Semi-Annual"
+msgstr "Semestrale"
+
+#. module: insurance_management
+#: model:ir.model.fields.selection,name:insurance_management.selection__sale_order__payment_frequency__quarterly
+msgid "Quarterly"
+msgstr "Trimestrale"
+
+#. module: insurance_management
+#: model:ir.model.fields.selection,name:insurance_management.selection__sale_order__payment_frequency__monthly
+msgid "Monthly"
+msgstr "Mensile"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__installment_count
+msgid "Number of Installments"
+msgstr "Numero di Rate"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__installment_amount
+msgid "Installment Amount"
+msgstr "Importo Rata"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__payment_ids
+msgid "Payments"
+msgstr "Pagamenti"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_sale_order__payment_count
+msgid "Payment Count"
+msgstr "Numero Pagamenti"
+
+#. module: insurance_management
+#: model:sale.order.line,name:insurance_management.insurance_premium
+#: model:product.template,name:insurance_management.product_insurance_premium
+msgid "Insurance Premium"
+msgstr "Premio Assicurativo"
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "You can only create payments for confirmed policies."
+msgstr "Puoi creare pagamenti solo per polizze confermate."
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Payments already exist for this policy."
+msgstr "Esistono già pagamenti per questa polizza."
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Policy Payments"
+msgstr "Pagamenti Polizza"
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Policy Expiration"
+msgstr "Scadenza Polizza"
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Policy %s will expire on %s. Contact the client for renewal."
+msgstr "La polizza %s scadrà il %s. Contattare il cliente per il rinnovo."
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Payment Reminder"
+msgstr "Promemoria Pagamento"
+
+#. module: insurance_management
+#: code:addons/insurance_management/models/sale_order.py:0
+#, python-format
+msgid "Payment of %s %s is due on %s for policy %s."
+msgstr "Il pagamento di %s %s è dovuto il %s per la polizza %s."
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_dashboard
+msgid "Dashboard"
+msgstr "Cruscotto"
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_policies
+msgid "Policies"
+msgstr "Polizze"
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_quotations
+msgid "Quotations"
+msgstr "Preventivi"
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_customers
+msgid "Customers"
+msgstr "Clienti"
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_agents
+msgid "Agents"
+msgstr "Agenti"
+
+#. module: insurance_management
+#: model:ir.ui.menu,name:insurance_management.menu_insurance_payments
+msgid "Payments"
+msgstr "Pagamenti"
+
+#. module: insurance_management
+#: model:ir.actions.act_window,name:insurance_management.action_insurance_policies
+msgid "Insurance Policies"
+msgstr "Polizze Assicurative"
+
+#. module: insurance_management
+#: model:ir.actions.act_window,name:insurance_management.action_insurance_quotations
+msgid "Insurance Quotations"
+msgstr "Preventivi Assicurativi"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_res_partner__tax_id_number
+msgid "Customer's tax identification number"
+msgstr "Codice fiscale del cliente"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_res_partner__profession
+msgid "Customer's profession or occupation"
+msgstr "Professione o occupazione del cliente"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_res_partner__agent_id
+msgid "Salesperson responsible for managing this customer's policies"
+msgstr "Venditore responsabile della gestione delle polizze di questo cliente"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_res_partner__is_insurance_agent
+msgid "Check if this partner is an insurance agent"
+msgstr "Seleziona se questo partner è un agente assicurativo"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__is_policy
+msgid "Identifies this sales order as an insurance policy"
+msgstr "Identifica questo ordine di vendita come una polizza assicurativa"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__policy_number
+msgid "Unique identifier for the policy"
+msgstr "Identificativo univoco per la polizza"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__start_date
+msgid "Policy start date"
+msgstr "Data di inizio della polizza"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__end_date
+msgid "Policy end date"
+msgstr "Data di fine della polizza"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__next_payment_date
+msgid "Date when the next payment is due"
+msgstr "Data in cui è previsto il prossimo pagamento"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__duration_months
+msgid "Policy duration in months"
+msgstr "Durata della polizza in mesi"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__vehicle_license_plate
+msgid "Vehicle license plate number"
+msgstr "Numero di targa del veicolo"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__vehicle_brand
+msgid "Vehicle manufacturer"
+msgstr "Produttore del veicolo"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__vehicle_model
+msgid "Vehicle model"
+msgstr "Modello del veicolo"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__vehicle_year
+msgid "Year of manufacture"
+msgstr "Anno di fabbricazione"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__has_theft_coverage
+msgid "Includes theft protection"
+msgstr "Include la protezione contro il furto"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__has_fire_coverage
+msgid "Includes fire protection"
+msgstr "Include la protezione contro gli incendi"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__has_black_box
+msgid "Includes black box device"
+msgstr "Include il dispositivo scatola nera"
+
+#. module: insurance_management
+#: model:ir.model.fields,help:insurance_management.field_sale_order__has_assistance
+msgid "Includes roadside assistance"
+msgstr "Include l'assistenza stradale"
+
+#. module: insurance_management
+#: model:ir.model,name:insurance_management.model_insurance_dashboard
+msgid "Insurance Dashboard"
+msgstr "Cruscotto Assicurativo"
+
+#. module: insurance_management
+#: model:ir.actions.act_window,name:insurance_management.action_insurance_dashboard
+msgid "Insurance Dashboard"
+msgstr "Cruscotto Assicurativo"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "View Policies"
+msgstr "Visualizza Polizze"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "View Customers"
+msgstr "Visualizza Clienti"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Show Graphs"
+msgstr "Mostra Grafici"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__name
+msgid "Dashboard"
+msgstr "Cruscotto"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__date_from
+msgid "From Date"
+msgstr "Data Iniziale"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__date_to
+msgid "To Date"
+msgstr "Data Finale"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Policy Statistics"
+msgstr "Statistiche Polizze"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__total_policies
+msgid "Total Policies"
+msgstr "Totale Polizze"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__active_policies
+msgid "Active Policies"
+msgstr "Polizze Attive"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__draft_policies
+msgid "Draft Policies"
+msgstr "Polizze in Bozza"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__expired_policies
+msgid "Expired Policies"
+msgstr "Polizze Scadute"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Revenue Statistics"
+msgstr "Statistiche Ricavi"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__total_premium
+msgid "Total Premium"
+msgstr "Premio Totale"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__paid_premium
+msgid "Paid Premium"
+msgstr "Premio Pagato"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__pending_premium
+msgid "Pending Premium"
+msgstr "Premio in Attesa"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__overdue_premium
+msgid "Overdue Premium"
+msgstr "Premio Scaduto"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Risk Profile"
+msgstr "Profilo di Rischio"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__vehicles_with_theft
+msgid "Vehicles with Theft Coverage"
+msgstr "Veicoli con Copertura Furto"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__vehicles_with_fire
+msgid "Vehicles with Fire Coverage"
+msgstr "Veicoli con Copertura Incendio"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__vehicles_with_black_box
+msgid "Vehicles with Black Box"
+msgstr "Veicoli con Scatola Nera"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__average_premium
+msgid "Average Premium"
+msgstr "Premio Medio"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Sales Performance"
+msgstr "Performance di Vendita"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__policies_by_agent
+msgid "Policies by Agent"
+msgstr "Polizze per Agente"
+
+#. module: insurance_management
+#: model:ir.model.fields,field_description:insurance_management.field_insurance_dashboard__premium_by_agent
+msgid "Premium by Agent"
+msgstr "Premio per Agente"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_graph
+msgid "Policy Statistics"
+msgstr "Statistiche Polizze"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Total Policies"
+msgstr "Totale Polizze"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Active Policies"
+msgstr "Polizze Attive"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Draft Policies"
+msgstr "Polizze in Bozza"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Expired Policies"
+msgstr "Polizze Scadute"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Total Premium"
+msgstr "Premio Totale"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Paid Premium"
+msgstr "Premio Pagato"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Pending Premium"
+msgstr "Premio in Attesa"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Overdue Premium"
+msgstr "Premio Scaduto"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Theft Coverage"
+msgstr "Copertura Furto"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Fire Coverage"
+msgstr "Copertura Incendio"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Black Box"
+msgstr "Scatola Nera"
+
+#. module: insurance_management
+#: model_terms:ir.ui.view,arch_db:insurance_management.view_insurance_dashboard_form
+msgid "Average Premium"
+msgstr "Premio Medio"

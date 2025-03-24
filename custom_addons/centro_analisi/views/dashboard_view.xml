@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <!-- Vista Dashboard -->
+        <!-- Vista Dashboard Form -->
         <record id="view_centro_analisi_dashboard" model="ir.ui.view">
             <field name="name">centro.analisi.dashboard.view</field>
             <field name="model">centro.analisi.dashboard</field>
@@ -23,19 +23,21 @@
                                 </group>
                             </div>
 
-                            <!-- Colonna Destra: Grafico -->
-                            <div style="flex: 1; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #ffffff;">
-                                <group>
-                                    <graph type="bar" string="Distribuzione Tipi di Analisi">
-                                        <field name="tipo_analisi_counts" type="measure"/>
-                                    </graph>
-                                </group>
-                            </div>
-
                         </div>
 
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <!-- Vista Dashboard Graph -->
+        <record id="view_centro_analisi_dashboard_graph" model="ir.ui.view">
+            <field name="name">centro.analisi.dashboard.graph</field>
+            <field name="model">centro.analisi.dashboard</field>
+            <field name="arch" type="xml">
+                <graph string="Distribuzione Tipi di Analisi" type="bar">
+                    <field name="tipo_analisi_counts" type="measure"/>
+                </graph>
             </field>
         </record>
     </data>

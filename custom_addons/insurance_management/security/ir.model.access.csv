@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_insurance_sale_order_user,insurance.sale.order.user,sale.model_sale_order,sales_team.group_sale_salesman,1,1,1,0
+access_insurance_sale_order_line_user,insurance.sale.order.line.user,sale.model_sale_order_line,sales_team.group_sale_salesman,1,1,1,0
+access_insurance_sale_order_manager,insurance.sale.order.manager,sale.model_sale_order,sales_team.group_sale_manager,1,1,1,1
+access_insurance_sale_order_line_manager,insurance.sale.order.line.manager,sale.model_sale_order_line,sales_team.group_sale_manager,1,1,1,1
+access_insurance_account_payment_user,insurance.account.payment.user,account.model_account_payment,sales_team.group_sale_salesman,1,1,1,0
+access_insurance_account_payment_manager,insurance.account.payment.manager,account.model_account_payment,sales_team.group_sale_manager,1,1,1,1
+access_insurance_dashboard_user,insurance.dashboard.user,model_insurance_dashboard,sales_team.group_sale_salesman,1,1,1,0
+access_insurance_dashboard_manager,insurance.dashboard.manager,model_insurance_dashboard,sales_team.group_sale_manager,1,1,1,1
+access_insurance_task_user,insurance.task.user,model_insurance_task,sales_team.group_sale_salesman,1,1,1,0
+access_insurance_task_manager,insurance.task.manager,model_insurance_task,sales_team.group_sale_manager,1,1,1,1
+access_insurance_workflow_user,insurance.workflow.user,model_insurance_workflow,sales_team.group_sale_salesman,1,0,0,0
+access_insurance_workflow_manager,insurance.workflow.manager,model_insurance_workflow,sales_team.group_sale_manager,1,1,1,1

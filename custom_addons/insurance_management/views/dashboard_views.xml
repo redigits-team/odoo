@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Insurance Dashboard Form View -->
+    <record id="view_insurance_dashboard_form" model="ir.ui.view">
+        <field name="name">insurance.dashboard.form</field>
+        <field name="model">insurance.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Dashboard">
+                <header>
+                    <button name="action_view_policy_list" string="View Policies" type="object" class="btn-primary"/>
+                    <button name="action_view_customer_list" string="View Customers" type="object" class="btn-secondary"/>
+                    <button name="action_view_graph" string="Show Graphs" type="object" class="btn-info"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                        </group>
+                        <field name="company_currency_id" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                    
+                    <!-- Policy Statistics -->
+                    <div class="row mt16 mb16">
+                        <div class="col-12">
+                            <h3>Policy Statistics</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-primary">Total Policies</h4>
+                                    <h2 class="mb-0"><field name="total_policies"/></h2>
+                                    <button type="object" name="action_view_all_policies" 
+                                            invisible="total_policies == 0"
+                                            class="btn btn-primary mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-success">Active Policies</h4>
+                                    <h2 class="mb-0 text-success"><field name="active_policies"/></h2>
+                                    <button type="object" name="action_view_active_policies" 
+                                            invisible="active_policies == 0"
+                                            class="btn btn-success mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-warning">Draft Policies</h4>
+                                    <h2 class="mb-0 text-warning"><field name="draft_policies"/></h2>
+                                    <button type="object" name="action_view_draft_policies" 
+                                            invisible="draft_policies == 0"
+                                            class="btn btn-warning mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-danger">Expired Policies</h4>
+                                    <h2 class="mb-0 text-danger"><field name="expired_policies"/></h2>
+                                    <button type="object" name="action_view_expired_policies" 
+                                            invisible="expired_policies == 0"
+                                            class="btn btn-danger mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Revenue Statistics -->
+                    <div class="row mt16 mb16">
+                        <div class="col-12">
+                            <h3>Revenue Statistics</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-primary">Total Premium</h4>
+                                    <h2 class="mb-0"><field name="total_premium" widget="monetary"/></h2>
+                                    <button type="object" name="action_view_policies_with_premium" 
+                                            invisible="total_premium == 0"
+                                            class="btn btn-primary mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-success">Paid Premium</h4>
+                                    <h2 class="mb-0 text-success"><field name="paid_premium" widget="monetary"/></h2>
+                                    <button type="object" name="action_view_paid_payments" 
+                                            invisible="paid_premium == 0"
+                                            class="btn btn-success mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-warning">Pending Premium</h4>
+                                    <h2 class="mb-0 text-warning"><field name="pending_premium" widget="monetary"/></h2>
+                                    <button type="object" name="action_view_pending_payments" 
+                                            invisible="pending_premium == 0"
+                                            class="btn btn-warning mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-danger">Overdue Premium</h4>
+                                    <h2 class="mb-0 text-danger"><field name="overdue_premium" widget="monetary"/></h2>
+                                    <button type="object" name="action_view_overdue_payments" 
+                                            invisible="overdue_premium == 0"
+                                            class="btn btn-danger mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Risk Profile -->
+                    <div class="row mt16 mb16">
+                        <div class="col-12">
+                            <h3>Risk Profile</h3>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-info">Theft Coverage</h4>
+                                    <h2 class="mb-0 text-info"><field name="vehicles_with_theft"/></h2>
+                                    <button type="object" name="action_view_theft_coverage" 
+                                            invisible="vehicles_with_theft == 0"
+                                            class="btn btn-info mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-warning">Fire Coverage</h4>
+                                    <h2 class="mb-0 text-warning"><field name="vehicles_with_fire"/></h2>
+                                    <button type="object" name="action_view_fire_coverage" 
+                                            invisible="vehicles_with_fire == 0"
+                                            class="btn btn-warning mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-secondary">Black Box</h4>
+                                    <h2 class="mb-0 text-secondary"><field name="vehicles_with_black_box"/></h2>
+                                    <button type="object" name="action_view_black_box" 
+                                            invisible="vehicles_with_black_box == 0"
+                                            class="btn btn-secondary mt-3">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="card h-100 bg-white">
+                                <div class="card-body text-center">
+                                    <h4 class="card-title text-primary">Average Premium</h4>
+                                    <h2 class="mb-0 text-primary"><field name="average_premium" widget="monetary"/></h2>
+                                    <button type="object" name="action_view_all_policies" 
+                                            invisible="total_policies == 0"
+                                            class="btn btn-primary mt-3">View All Policies</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sales Performance -->
+                    <div class="row mt16 mb16">
+                        <div class="col-12">
+                            <h3>Sales Performance</h3>
+                        </div>
+                        <div class="col-6">
+                            <div class="card h-100 bg-white">
+                                <div class="card-header">
+                                    <h4 class="m-0">Policies by Agent</h4>
+                                </div>
+                                <div class="card-body">
+                                    <field name="policies_by_agent" widget="text" class="text-monospace"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card h-100 bg-white">
+                                <div class="card-header">
+                                    <h4 class="m-0">Premium by Agent</h4>
+                                </div>
+                                <div class="card-body">
+                                    <field name="premium_by_agent" widget="text" class="text-monospace"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Policy Statistics Graph View -->
+    <record id="view_insurance_dashboard_graph" model="ir.ui.view">
+        <field name="name">insurance.dashboard.graph</field>
+        <field name="model">insurance.dashboard</field>
+        <field name="arch" type="xml">
+            <graph string="Policy Statistics" type="bar" stacked="True">
+                <field name="name" type="row"/>
+                <field name="active_policies" type="measure"/>
+                <field name="draft_policies" type="measure"/>
+                <field name="expired_policies" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <!-- Dashboard Action -->
+    <record id="action_insurance_dashboard" model="ir.actions.act_window">
+        <field name="name">Insurance Dashboard</field>
+        <field name="res_model">insurance.dashboard</field>
+        <field name="view_mode">form,graph</field>
+        <field name="target">current</field>
+        <field name="context">{'create': False, 'edit': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Insurance Dashboard
+            </p>
+        </field>
+    </record>
+</odoo>

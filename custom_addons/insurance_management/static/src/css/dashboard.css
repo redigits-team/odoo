@@ -1,0 +1,26 @@
+.card-dashboard-clickable {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.card-dashboard-clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a subtle highlight effect */
+.card-dashboard-clickable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 123, 255, 0);
+    transition: background-color 0.3s ease;
+}
+
+.card-dashboard-clickable:hover::after {
+    background-color: rgba(0, 123, 255, 0.05);
+}

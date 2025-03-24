@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Insurance Menu -->
+    <menuitem id="menu_insurance_root"
+              name="Insurance"
+              web_icon="insurance_management,static/description/icon.png"
+              sequence="85"/>
+    
+    <!-- Insurance Dashboard -->
+    <menuitem id="menu_insurance_dashboard"
+              name="Dashboard"
+              parent="menu_insurance_root"
+              action="insurance_management.action_insurance_dashboard"
+              sequence="1"/>
+              
+    <!-- Insurance Operations Menu -->
+    <menuitem id="menu_insurance_operations"
+              name="Operations"
+              parent="menu_insurance_root"
+              sequence="10"/>
+              
+    <menuitem id="menu_insurance_quotations"
+              name="Quotations"
+              parent="menu_insurance_operations"
+              action="insurance_management.action_insurance_quotations"
+              sequence="1"/>
+              
+    <menuitem id="menu_insurance_policies"
+              name="Policies"
+              parent="menu_insurance_operations"
+              action="insurance_management.action_insurance_policy_management"
+              sequence="2"/>
+              
+    <menuitem id="menu_insurance_payments"
+              name="Payments"
+              parent="menu_insurance_operations"
+              action="insurance_management.action_insurance_payments"
+              sequence="3"/>
+              
+    <!-- Insurance Partners Menu -->
+    <menuitem id="menu_insurance_partners"
+              name="Partners"
+              parent="menu_insurance_root"
+              sequence="20"/>
+              
+    <menuitem id="menu_insurance_customers"
+              name="Customers"
+              parent="menu_insurance_partners"
+              action="insurance_management.action_insurance_clients"
+              sequence="1"/>
+              
+    <menuitem id="menu_insurance_agents"
+              name="Insurance Agents"
+              parent="menu_insurance_partners"
+              action="insurance_management.action_insurance_agents"
+              sequence="2"/>
+              
+    <!-- Reporting Menu -->
+    <menuitem id="menu_insurance_reporting"
+              name="Reporting"
+              parent="menu_insurance_root"
+              sequence="30"/>
+              
+    <menuitem id="menu_insurance_policies_report"
+              name="Policies Analysis"
+              parent="menu_insurance_reporting"
+              action="action_insurance_policies"
+              sequence="1"/>
+              
+    <!-- Tasks Menu -->
+    <menuitem id="menu_insurance_task_management"
+              name="Tasks"
+              parent="menu_insurance_root"
+              sequence="25"/>
+              
+    <menuitem id="menu_insurance_tasks"
+              name="Insurance Tasks"
+              parent="menu_insurance_task_management"
+              action="insurance_management.action_insurance_tasks"
+              sequence="1"/>
+              
+    <!-- Configuration Menu -->
+    <menuitem id="menu_insurance_configuration"
+              name="Configuration"
+              parent="menu_insurance_root"
+              groups="sales_team.group_sale_manager"
+              sequence="100"/>
+              
+    <menuitem id="menu_insurance_workflows"
+              name="Automated Workflows"
+              parent="menu_insurance_configuration"
+              action="insurance_management.action_insurance_workflows"
+              sequence="1"/>
+</odoo>

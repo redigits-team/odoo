@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Insurance Policy Form View -->
+    <record id="view_insurance_policy_form" model="ir.ui.view">
+        <field name="name">sale.order.insurance.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <!-- Change form title to Insurance Policy -->
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Insurance Policy</attribute>
+            </xpath>
+            
+            <!-- Change button labels from Quote to Policy -->
+            <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                <attribute name="string">Send Policy by Email</attribute>
+            </xpath>
+            
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="string">Confirm Policy</attribute>
+            </xpath>
+            
+            <!-- Add policy fields under the partner section -->
+            <xpath expr="//group[@name='order_details']" position="after">
+                <group>
+                    <group>
+                        <field name="is_policy" invisible="1"/>
+                        <field name="policy_number"/>
+                        <field name="start_date" required="1"/>
+                        <field name="end_date" readonly="1"/>
+                        <field name="duration_months"/>
+                        <field name="policy_status" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="payment_frequency"/>
+                        <field name="installment_count"/>
+                        <field name="installment_amount" widget="monetary"/>
+                        <field name="next_payment_date" readonly="1"/>
+                        <field name="payment_count" readonly="1"/>
+                    </group>
+                </group>
+                
+                <notebook>
+                    <page string="Vehicle Information" name="vehicle_info">
+                        <group>
+                            <group>
+                                <field name="vehicle_license_plate"/>
+                                <field name="vehicle_brand"/>
+                            </group>
+                            <group>
+                                <field name="vehicle_model"/>
+                                <field name="vehicle_year"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Coverage Options" name="coverage_options">
+                        <group>
+                            <field name="has_theft_coverage"/>
+                            <field name="has_fire_coverage"/>
+                            <field name="has_black_box"/>
+                            <field name="has_assistance"/>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+            
+            <!-- Add payment buttons in header -->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_payments" 
+                        type="object" 
+                        string="Create Payments"
+                        invisible="state != 'sale' or payment_count > 0"
+                        class="btn-primary"/>
+                        
+                <button name="action_view_payments" 
+                        type="object" 
+                        string="View Payments"
+                        invisible="payment_count == 0"
+                        class="btn-secondary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Insurance Policy Tree View -->
+    <record id="view_insurance_policy_tree" model="ir.ui.view">
+        <field name="name">sale.order.insurance.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="string">Insurance Policies</attribute>
+            </xpath>
+            
+            <field name="name" position="after">
+                <field name="policy_number"/>
+            </field>
+            
+            <field name="date_order" position="after">
+                <field name="start_date"/>
+                <field name="end_date"/>
+            </field>
+            
+            <field name="state" position="replace">
+                <field name="policy_status" widget="badge" 
+                       decoration-success="policy_status == 'sale'" 
+                       decoration-info="policy_status == 'sent'" 
+                       decoration-warning="policy_status == 'draft'" 
+                       decoration-danger="policy_status == 'cancel'"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Insurance Quotation/Policy Search View -->
+    <record id="view_insurance_policy_search" model="ir.ui.view">
+        <field name="name">sale.order.insurance.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="attributes">
+                <attribute name="string">Search Insurance Policies</attribute>
+            </xpath>
+            
+            <field name="name" position="after">
+                <field name="policy_number"/>
+                <field name="vehicle_license_plate"/>
+                <field name="vehicle_brand"/>
+                <field name="vehicle_model"/>
+            </field>
+            
+            <filter name="my_sale_orders_filter" position="after">
+                <separator/>
+                <filter string="Active Policies" name="active_policies" domain="[('policy_status', '=', 'sale')]"/>
+                <filter string="Draft Policies" name="draft_policies" domain="[('policy_status', '=', 'draft')]"/>
+                <filter string="Expired Policies" name="expired_policies" domain="[('end_date', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Policies with Theft Coverage" name="theft_coverage" domain="[('has_theft_coverage', '=', True)]"/>
+                <filter string="Policies with Fire Coverage" name="fire_coverage" domain="[('has_fire_coverage', '=', True)]"/>
+                <filter string="Policies with Black Box" name="black_box" domain="[('has_black_box', '=', True)]"/>
+                <filter string="Policies with Assistance" name="assistance" domain="[('has_assistance', '=', True)]"/>
+            </filter>
+            
+            <group position="inside">
+                <filter string="Start Date" name="start_date" domain="[]" context="{'group_by': 'start_date:month'}"/>
+                <filter string="End Date" name="end_date" domain="[]" context="{'group_by': 'end_date:month'}"/>
+                <filter string="Next Payment" name="next_payment" domain="[]" context="{'group_by': 'next_payment_date:month'}"/>
+            </group>
+        </field>
+    </record>
+
+    <!-- Insurance Policies Action -->
+    <record id="action_insurance_policies" model="ir.actions.act_window">
+        <field name="name">Insurance Policies</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form,kanban,calendar,pivot,graph</field>
+        <field name="domain">[('is_policy', '=', True)]</field>
+        <field name="context">{'default_is_policy': True}</field>
+        <field name="search_view_id" ref="view_insurance_policy_search"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_insurance_policy_tree')}),
+                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_insurance_policy_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance policy
+            </p>
+        </field>
+    </record>
+
+    <!-- Insurance Quotations View -->
+    <record id="action_insurance_quotations" model="ir.actions.act_window">
+        <field name="name">Insurance Quotations</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form,kanban,calendar,pivot,graph</field>
+        <field name="domain">[('is_policy', '=', True), ('policy_status', 'in', ['draft', 'sent'])]</field>
+        <field name="context">{'default_is_policy': True}</field>
+        <field name="search_view_id" ref="view_insurance_policy_search"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                 (0, 0, {'view_mode': 'list', 'view_id': ref('view_insurance_policy_tree')}),
+                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_insurance_policy_form')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance quotation
+            </p>
+        </field>
+    </record>
+</odoo>

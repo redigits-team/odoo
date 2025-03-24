@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Insurance Task Form View -->
+    <record id="view_insurance_task_form" model="ir.ui.view">
+        <field name="name">insurance.task.form</field>
+        <field name="model">insurance.task</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Task">
+                <header>
+                    <button name="action_mark_in_progress" string="Mark as In Progress" type="object" 
+                            invisible="state != 'new'" class="btn-primary"/>
+                    <button name="action_mark_done" string="Mark as Done" type="object" 
+                            invisible="state in ['done', 'cancelled']" class="btn-success"/>
+                    <button name="action_cancel" string="Cancel" type="object" 
+                            invisible="state in ['done', 'cancelled']" class="btn-warning"/>
+                    <button name="action_reset_new" string="Reset to New" type="object" 
+                            invisible="state == 'new'" class="btn-secondary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_policy" type="object" class="oe_stat_button" icon="fa-file-text-o"
+                                invisible="not policy_id">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">View Policy</span>
+                            </div>
+                        </button>
+                        <button name="action_view_client" type="object" class="oe_stat_button" icon="fa-user"
+                                invisible="not partner_id">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">View Client</span>
+                            </div>
+                        </button>
+                        <button name="action_view_payment" type="object" class="oe_stat_button" icon="fa-money"
+                                invisible="not payment_id">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">View Payment</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Task Title" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Renewal Reminder"/></h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="task_type"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="user_id"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                        <group>
+                            <field name="due_date"/>
+                            <field name="create_date" readonly="1"/>
+                            <field name="completion_date" readonly="1"/>
+                            <field name="kanban_state" widget="state_selection"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group>
+                            <field name="policy_id" options="{'no_create': True}"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="payment_id" options="{'no_create': True}" invisible="task_type != 'payment'"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Add a description here..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Insurance Task Tree View -->
+    <record id="view_insurance_task_tree" model="ir.ui.view">
+        <field name="name">insurance.task.tree</field>
+        <field name="model">insurance.task</field>
+        <field name="arch" type="xml">
+            <list string="Insurance Tasks">
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="name"/>
+                <field name="task_type"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="policy_id"/>
+                <field name="due_date"/>
+                <field name="state" widget="badge" 
+                       decoration-success="state == 'done'" 
+                       decoration-info="state == 'in_progress'" 
+                       decoration-warning="state == 'new'" 
+                       decoration-danger="state == 'cancelled'"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Insurance Task Kanban View -->
+    <record id="view_insurance_task_kanban" model="ir.ui.view">
+        <field name="name">insurance.task.kanban</field>
+        <field name="model">insurance.task</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column" sample="1"
+                    records_draggable="1" group_create="false" group_delete="false">
+                <field name="id"/>
+                <field name="color"/>
+                <field name="name"/>
+                <field name="task_type"/>
+                <field name="priority"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="policy_id"/>
+                <field name="state"/>
+                <field name="kanban_state"/>
+                <field name="due_date"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + record.color.raw_value : ''}} oe_kanban_card oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown">
+                                <a role="button" class="dropdown-toggle o-no-caret btn" data-bs-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                    <span class="fa fa-ellipsis-v"/>
+                                </a>
+                                <div class="dropdown-menu" role="menu">
+                                    <t t-if="widget.editable">
+                                        <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                    </t>
+                                    <div role="separator" class="dropdown-divider"/>
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
+                            </div>
+                            
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <div class="o_kanban_record_title" t-att-title="record.name.value">
+                                            <field name="name"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <field name="priority" widget="priority"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="o_kanban_record_body">
+                                    <div class="badge rounded-pill text-bg-info mb-1">
+                                        <field name="task_type"/>
+                                    </div>
+                                    <div t-if="record.partner_id.value">
+                                        <span>Client: </span><field name="partner_id"/>
+                                    </div>
+                                    <div t-if="record.policy_id.value">
+                                        <span>Policy: </span><field name="policy_id"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="user_id" widget="many2one_avatar_user"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="due_date"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <!-- Insurance Task Calendar View -->
+    <record id="view_insurance_task_calendar" model="ir.ui.view">
+        <field name="name">insurance.task.calendar</field>
+        <field name="model">insurance.task</field>
+        <field name="arch" type="xml">
+            <calendar string="Insurance Tasks" 
+                      date_start="due_date" 
+                      event_open_popup="true"
+                      mode="month">
+                <field name="name"/>
+                <field name="user_id" avatar_field="image_128" filters="1"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+    
+    <!-- Insurance Task Search View -->
+    <record id="view_insurance_task_search" model="ir.ui.view">
+        <field name="name">insurance.task.search</field>
+        <field name="model">insurance.task</field>
+        <field name="arch" type="xml">
+            <search string="Search Insurance Tasks">
+                <field name="name" string="Task"/>
+                <field name="partner_id" string="Client"/>
+                <field name="policy_id" string="Policy"/>
+                <field name="task_type"/>
+                <field name="user_id"/>
+                
+                <separator/>
+                <filter string="My Tasks" name="my_tasks" domain="[('user_id', '=', uid)]"/>
+                <filter string="Unassigned" name="unassigned" domain="[('user_id', '=', False)]"/>
+                
+                <separator/>
+                <filter string="New" name="new" domain="[('state', '=', 'new')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                
+                <separator/>
+                <filter string="Expiration Tasks" name="expiration" domain="[('task_type', '=', 'expiration')]"/>
+                <filter string="Payment Tasks" name="payment" domain="[('task_type', '=', 'payment')]"/>
+                <filter string="Approval Tasks" name="approval" domain="[('task_type', '=', 'approval')]"/>
+                <filter string="Follow-up Tasks" name="follow_up" domain="[('task_type', '=', 'follow_up')]"/>
+                
+                <separator/>
+                <filter string="Late" name="late" domain="[('due_date', '&lt;', context_today().strftime('%Y-%m-%d')), ('state', 'not in', ['done', 'cancelled'])]"/>
+                <filter string="Today" name="today" domain="[('due_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Upcoming" name="upcoming" domain="[('due_date', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Type" name="group_by_type" domain="[]" context="{'group_by': 'task_type'}"/>
+                    <filter string="Assigned To" name="group_by_user" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Client" name="group_by_partner" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Policy" name="group_by_policy" domain="[]" context="{'group_by': 'policy_id'}"/>
+                    <filter string="Due Date" name="group_by_due_date" domain="[]" context="{'group_by': 'due_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Insurance Task Action -->
+    <record id="action_insurance_tasks" model="ir.actions.act_window">
+        <field name="name">Insurance Tasks</field>
+        <field name="res_model">insurance.task</field>
+        <field name="view_mode">kanban,list,form,calendar</field>
+        <field name="context">{'search_default_my_tasks': 1, 'search_default_new': 1, 'search_default_in_progress': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance task
+            </p>
+        </field>
+    </record>
+    
+    <!-- Insurance Workflow Views -->
+    <record id="view_insurance_workflow_form" model="ir.ui.view">
+        <field name="name">insurance.workflow.form</field>
+        <field name="model">insurance.workflow</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Workflow">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Workflow Name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="e.g. Policy Expiration Reminder"/></h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="type"/>
+                            <field name="action_type"/>
+                            <field name="days_before"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="notify_agent"/>
+                            <field name="notify_client"/>
+                            <field name="auto_execute"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    
+                    <group invisible="action_type != 'email'">
+                        <field name="template_id" string="Email Template" invisible="action_type != 'email'" options="{'no_create': True}"/>
+                    </group>
+                    
+                    <group string="Description">
+                        <field name="description" nolabel="1" placeholder="Add a description here..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_insurance_workflow_tree" model="ir.ui.view">
+        <field name="name">insurance.workflow.tree</field>
+        <field name="model">insurance.workflow</field>
+        <field name="arch" type="xml">
+            <list string="Insurance Workflows">
+                <field name="sequence" widget="handle"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="action_type"/>
+                <field name="days_before"/>
+                <field name="template_id" optional="show"/>
+                <field name="auto_execute" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+            </list>
+        </field>
+    </record>
+    
+    <record id="view_insurance_workflow_search" model="ir.ui.view">
+        <field name="name">insurance.workflow.search</field>
+        <field name="model">insurance.workflow</field>
+        <field name="arch" type="xml">
+            <search string="Search Workflows">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="action_type"/>
+                
+                <separator/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                
+                <separator/>
+                <filter string="Expiration Workflows" name="expiration" domain="[('type', '=', 'expiration')]"/>
+                <filter string="Payment Workflows" name="payment" domain="[('type', '=', 'payment')]"/>
+                <filter string="Approval Workflows" name="approval" domain="[('type', '=', 'approval')]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Type" name="group_by_type" domain="[]" context="{'group_by': 'type'}"/>
+                    <filter string="Action Type" name="group_by_action" domain="[]" context="{'group_by': 'action_type'}"/>
+                    <filter string="Company" name="group_by_company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <record id="action_insurance_workflows" model="ir.actions.act_window">
+        <field name="name">Automated Workflows</field>
+        <field name="res_model">insurance.workflow</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new automated workflow
+            </p>
+            <p>
+                Workflows allow you to automate actions like sending reminders,
+                creating tasks, or approving policies based on events like policy
+                expirations or payment due dates.
+            </p>
+        </field>
+    </record>
+</odoo>
